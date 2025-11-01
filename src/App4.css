@@ -1,106 +1,100 @@
-.App {
-  font-family: Arial, sans-serif;
-  max-width: 1000px;
-  margin: auto;
-  padding: 20px;
+/* General body styling */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
 }
 
-.header {
+/* Container */
+div {
+  max-width: 800px;
+  margin: 40px auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+
+h2 {
+  color: #34495e;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+form input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #bdc3c7;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+form button {
+  padding: 8px 16px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+form button:hover {
+  background-color: #2980b9;
+}
+
+/* Lists */
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
-  border-bottom: 2px solid #333;
-  padding-bottom: 10px;
+  background-color: #ecf0f1;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 6px;
 }
 
-.cart-count {
-  font-size: 1.2rem;
-}
-
-.food-list {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.food-item {
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 15px;
-  width: 200px;
-  text-align: center;
-  transition: transform 0.2s;
-}
-
-.food-item:hover {
-  transform: scale(1.05);
-}
-
-.food-item img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.food-item button {
-  margin-top: 10px;
-  padding: 5px 10px;
-  cursor: pointer;
-  background-color: #007bff;
-  border: none;
+li button {
+  background-color: #e74c3c;
   color: white;
-  border-radius: 5px;
-}
-
-.food-item button:hover {
-  background-color: #0056b3;
-}
-
-.cart {
-  margin-top: 40px;
-  border-top: 2px solid #333;
-  padding-top: 20px;
-}
-
-.cart button {
-  margin-left: 10px;
-  padding: 3px 7px;
-  cursor: pointer;
-}
-
-.vendor-form {
-  margin-top: 40px;
-  border-top: 2px solid #333;
-  padding-top: 20px;
-}
-
-.vendor-form form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.vendor-form input, .vendor-form select {
-  padding: 7px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.vendor-form button {
-  padding: 7px;
-  background-color: #28a745;
   border: none;
-  color: white;
-  border-radius: 5px;
+  padding: 6px 12px;
+  border-radius: 6px;
   cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.2s ease;
 }
 
-.vendor-form button:hover {
-  background-color: #1e7e34;
+li button:hover {
+  background-color: #c0392b;
 }
 
-.filter {
-  margin-bottom: 15px;
+/* Total */
+p {
+  font-weight: bold;
+  text-align: right;
+  margin-top: 15px;
+  font-size: 16px;
 }

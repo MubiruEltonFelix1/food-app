@@ -93,8 +93,14 @@ html,
 
 .food-image {
   width: 100%;
-  height: 160px;
+  height: 200px; /* increased height for better quality on large screens */
   object-fit: cover;
+  border-bottom: 1px solid #eee;
+  transition: transform 0.3s ease;
+}
+
+.food-image:hover {
+  transform: scale(1.05);
 }
 
 .food-card h3 {
@@ -140,11 +146,10 @@ html,
 }
 
 .cart-image {
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   object-fit: cover;
-  border-radius: 5px;
-  margin-right: 15px;
+  border-radius: 6px;
 }
 
 .cart-details h4 {
@@ -175,4 +180,31 @@ html,
   font-size: 1.2rem;
   text-align: right;
   color: #333;
+}
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .sidebar {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .main-content {
+    width: 100%;
+  }
+
+  .food-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .food-image {
+    height: 140px;
+  }
+
+  .cart-section {
+    margin-top: 20px;
+  }
 }

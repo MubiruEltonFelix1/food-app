@@ -5,23 +5,23 @@ function App() {
   const [foods, setFoods] = useState([
     {
       id: 1,
-      name: "Chapati & Beans",
-      price: 200,
+      name: "FCI Pizza",
+      price: 30000,
       category: "Breakfast",
-      image: "./images/images.jpg",},
+      image: "./images/download (1).jpg",},
     {
       id: 2,
-      name: "Matoke with Beef",
-      price: 500,
+      name: "Ugandan Spaghetti",
+      price: 5000,
       category: "Lunch",
       image: "./images/download (3).jpg",
     },
     {
       id: 3,
-      name: "Roasted Maize",
+      name: "Chips, Chicken & Burger",
       price: 100,
       category: "Snack",
-      image: "./images/download (4).jpg",
+      image: "./images/download (2).jpg",
     },
   ]);
 

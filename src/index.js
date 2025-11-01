@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 // import ReactDOM from 'react-dom';
 
 import App from "./app4";
-import "./App4.css";
+import "./components/Marketplace";
 
 // REACT 18
 const root = ReactDOM.createRoot(document.getElementById("root"));

@@ -1,71 +1,130 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+Campus Food Marketplace 🍴
 
-In the project directory, you can run:
+**Campus Food Marketplace** is a dynamic web application built with **React** that allows users to browse, search, and order food from campus vendors. The app features a professional UI, dynamic food listings via APIs, a cart system, and user role management for admins and customers.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## **Features**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* Responsive and modern interface with a top navigation bar
+* Dynamic food listings fetched from APIs
+* Search and filter foods by category
+* Add new foods (Admin only)
+* Cart functionality with quantity management
+* Order management for users
+* User profile management
+* Role-based permissions (Admin vs Customer)
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## **Demo**
 
-### `npm run build`
+https://campusfoodapp.netlify.app/
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## **Tech Stack**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+* **Frontend:** React, React Hooks (`useState`, `useEffect`), CSS
+* **API:** TheMealDB API for food data
+* **Backend:** Optional Node.js/Express + MongoDB (for advanced versions)
+* **Hosting:** Netlify
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## **Getting Started**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### **Prerequisites**
 
-## Learn More
+* Node.js >= 18
+* npm or yarn
+* Git
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### **Installation**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Clone the repository:
 
-### Code Splitting
+```bash
+git clone https://github.com/yourusername/campus-food-marketplace.git
+cd campus-food-marketplace
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+2. Install dependencies:
 
-### Analyzing the Bundle Size
+```bash
+npm install
+# or
+yarn install
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+3. Start the development server:
 
-### Making a Progressive Web App
+```bash
+npm start
+# or
+yarn start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+4. Open your browser and go to `http://localhost:3000`
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### **Project Structure**
 
-### Deployment
+```
+campus-food-marketplace/
+├─ public/
+├─ src/
+│  ├─ components/
+│  │  ├─ Marketplace.js
+│  │  ├─ SplashScreen.js
+│  │  └─ ...
+│  ├─ App.js
+│  ├─ App.css
+│  └─ index.js
+├─ package.json
+└─ README.md
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## **Usage**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-"# food-app" 
+* Customers can browse and add foods to the cart
+* Admins can add new foods using the “Add Food” form
+* Use the top navigation bar to switch between sections
+* Place orders and view your order history
+
+---
+
+## **Contributing**
+
+We welcome contributions!
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/my-feature`
+3. Commit your changes: `git commit -m "Add my feature"`
+4. Push to the branch: `git push origin feature/my-feature`
+5. Open a pull request
+
+---
+
+## **License**
+
+This project is open-source and available under the [MIT License](LICENSE)
+
+---
+
+## **Made By**
+
+**Mubiru Elton Felix**
+
+---
+
+If you want, I can also **draft a more advanced, professional README with badges, live demo links, GIFs/screenshots, and API usage examples** — like you see in top-tier GitHub repos.
+
+Do you want me to do that?

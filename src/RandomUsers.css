@@ -1,0 +1,132 @@
+/* Reset and base styles */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-bg: #1e1e2f;        /* deep dark blue */
+    --primary-text: #ffffff;      /* white text */
+    --secondary-bg: #fdf6f0;      /* soft off-white */
+    --card-bg: #ffffff;            /* card background */
+    --card-shadow: rgba(0, 0, 0, 0.15);
+    --accent-color: #ff6f61;       /* subtle vibrant accent */
+    --text-dark: #333333;
+    --text-light: #666666;
+}
+
+/* Import Poppins font */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--secondary-bg);
+    color: var(--text-dark);
+}
+
+/* Title section */
+.title-section {
+    height: 9vh;
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-section h1 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+/* Images section */
+.images-body {
+    height: 89vh;
+    background-color: #fdf6f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 20px;
+}
+
+.images-title h1 {
+    font-size: 3.5rem;
+    color: var(--primary-text);
+    background-color: var(--accent-color);
+    padding: 20px 40px;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Users list grid */
+.users-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* User cards */
+.user-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px var(--card-shadow);
+    padding: 20px;
+    width: 220px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.user-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px var(--card-shadow);
+}
+
+.user-card img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 2px solid var(--accent-color);
+}
+
+.user-card h3 {
+    font-size: 1.2rem;
+    margin: 8px 0;
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.user-card p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    margin: 4px 0;
+    word-break: break-word;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .images-title h1 {
+        font-size: 2.5rem;
+        padding: 15px 20px;
+    }
+    
+    .user-card {
+        width: 45%;
+    }
+}
+
+@media (max-width: 480px) {
+    .user-card {
+        width: 90%;
+    }
+
+    .images-title h1 {
+        font-size: 2rem;
+        padding: 10px 15px;
+    }
+}

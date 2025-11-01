@@ -1,45 +1,67 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "./Marketplace.css";
 
 function App() {
-  const [foods, setFoods] = useState([
-    {
-      id: 1,
-      name: "FCI Pizza",
-      price: 30000,
-      category: "Breakfast",
-      image: "./images/download (1).jpg",},
-    {
-      id: 2,
-      name: "Ugandan Spaghetti",
-      price: 5000,
-      category: "Lunch",
-      image: "./images/download (3).jpg",
-    },
-    {
-      id: 3,
-      name: "Chips, Chicken & Burger",
-      price: 100,
-      category: "Snack",
-      image: "./images/download (2).jpg",
-    },
-  ]);
-
+  const [foods, setFoods] = useState([]);
+  const [filteredFoods, setFilteredFoods] = useState([]);
+  const [categories, setCategories] = useState(["All"]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [searchTerm, setSearchTerm] = useState("");
   const [cart, setCart] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+
   const [newFood, setNewFood] = useState({
     name: "",
     price: "",
     category: "",
     image: "",
   });
-  const [categoryFilter, setCategoryFilter] = useState("");
 
+  // ✅ Fetch food data dynamically from TheMealDB API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const categoryRes = await axios.get(
+          "https://www.themealdb.com/api/json/v1/1/list.php?c=list"
+        );
+        setCategories(["All", ...categoryRes.data.meals.map((c) => c.strCategory)]);
+
+        const foodRes = await axios.get(
+          "https://www.themealdb.com/api/json/v1/1/search.php?s="
+        );
+        setFoods(foodRes.data.meals);
+        setFilteredFoods(foodRes.data.meals);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // ✅ Filter and search logic
+  useEffect(() => {
+    let filtered = foods;
+    if (selectedCategory !== "All") {
+      filtered = filtered.filter(
+        (food) => food.strCategory === selectedCategory
+      );
+    }
+    if (searchTerm.trim()) {
+      filtered = filtered.filter((food) =>
+        food.strMeal.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+    setFilteredFoods(filtered);
+  }, [selectedCategory, searchTerm, foods]);
+
+  // ✅ Add to Cart
   const addToCart = (food) => {
-    const existingItem = cart.find((item) => item.id === food.id);
+    const existingItem = cart.find((item) => item.idMeal === food.idMeal);
     if (existingItem) {
       setCart(
         cart.map((item) =>
-          item.id === food.id
+          item.idMeal === food.idMeal
             ? { ...item, quantity: item.quantity + 1 }
             : item
         )
@@ -49,26 +71,18 @@ function App() {
     }
   };
 
-  const removeFromCart = (indexToRemove) => {
-    const item = cart[indexToRemove];
-    if (item.quantity > 1) {
-      setCart(
-        cart.map((c, idx) =>
-          idx === indexToRemove
-            ? { ...c, quantity: c.quantity - 1 }
-            : c
-        )
-      );
-    } else {
-      setCart(cart.filter((_, idx) => idx !== indexToRemove));
-    }
+  // ✅ Remove from Cart
+  const removeFromCart = (idMeal) => {
+    setCart(cart.filter((item) => item.idMeal !== idMeal));
   };
 
+  // ✅ Handle input change for form
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNewFood({ ...newFood, [name]: value });
   };
 
+  // ✅ Add new food item
   const handleAddFood = (e) => {
     e.preventDefault();
     if (
@@ -80,87 +94,55 @@ function App() {
       return;
 
     const newItem = {
-      id: Date.now(),
-      name: newFood.name,
+      idMeal: Date.now(),
+      strMeal: newFood.name,
+      strCategory: newFood.category,
       price: parseInt(newFood.price, 10),
-      category: newFood.category,
-      image: newFood.image,
+      strMealThumb: newFood.image,
     };
 
-    setFoods([...foods, newItem]);
+    setFoods([newItem, ...foods]);
+    setShowForm(false);
     setNewFood({ name: "", price: "", category: "", image: "" });
   };
-
-  const filteredFoods = categoryFilter
-    ? foods.filter((food) => food.category === categoryFilter)
-    : foods;
 
   return (
     <div className="app">
       <NavBar />
+
+      {/* Search and Filter Section */}
+      <div className="search-filter-bar">
+        <input
+          type="text"
+          placeholder="Search food..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div className="container">
-        <div className="sidebar">
-          <h2>Add New Food Item</h2>
-          <form onSubmit={handleAddFood} className="add‐food-form">
-            <input
-              type="text"
-              name="name"
-              placeholder="Food Name"
-              value={newFood.name}
-              onChange={handleChange}
-            />
-            <input
-              type="number"
-              name="price"
-              placeholder="Price (UGX)"
-              value={newFood.price}
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="category"
-              placeholder="Category (e.g. Lunch)"
-              value={newFood.category}
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="image"
-              placeholder="Image URL"
-              value={newFood.image}
-              onChange={handleChange}
-            />
-            <button type="submit">Add Food</button>
-          </form>
-
-          <div className="filter-section">
-            <h2>Filter by Category</h2>
-            <select
-              value={categoryFilter}
-              onChange={(e) => setCategoryFilter(e.target.value)}
-            >
-              <option value="">All</option>
-              {[...new Set(foods.map((f) => f.category))].map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
         <div className="main-content">
           <h2>Food Items</h2>
           <div className="food-grid">
             {filteredFoods.map((food) => (
-              <div key={food.id} className="food-card">
+              <div key={food.idMeal} className="food-card">
                 <img
-                  src={food.image}
-                  alt={food.name}
+                  src={food.strMealThumb}
+                  alt={food.strMeal}
                   className="food-image"
                 />
-                <h3>{food.name}</h3>
-                <p>UGX {food.price}</p>
+                <h3>{food.strMeal}</h3>
+                <p>{food.strCategory}</p>
                 <button onClick={() => addToCart(food)}>Add to Cart</button>
               </div>
             ))}
@@ -172,21 +154,21 @@ function App() {
               <p>Your cart is empty.</p>
             ) : (
               <ul className="cart-list">
-                {cart.map((item, index) => (
-                  <li key={item.id} className="cart-item">
+                {cart.map((item) => (
+                  <li key={item.idMeal} className="cart-item">
                     <img
-                      src={item.image}
-                      alt={item.name}
+                      src={item.strMealThumb}
+                      alt={item.strMeal}
                       className="cart-image"
                     />
                     <div className="cart-details">
-                      <h4>{item.name}</h4>
+                      <h4>{item.strMeal}</h4>
                       <p>
-                        UGX {item.price} × {item.quantity}
+                        UGX {item.price || 2000} × {item.quantity}
                       </p>
                       <button
                         className="remove-btn"
-                        onClick={() => removeFromCart(index)}
+                        onClick={() => removeFromCart(item.idMeal)}
                       >
                         Remove
                       </button>
@@ -198,13 +180,61 @@ function App() {
             <h3 className="cart-total">
               Total: UGX{" "}
               {cart.reduce(
-                (acc, item) => acc + item.price * item.quantity,
+                (acc, item) =>
+                  acc + (item.price || 2000) * item.quantity,
                 0
               )}
             </h3>
           </div>
         </div>
+
+        {/* Add Food Floating Button */}
+        <button
+          className="add-btn"
+          onClick={() => setShowForm(!showForm)}
+        >
+          {showForm ? "×" : "+"}
+        </button>
+
+        {showForm && (
+          <div className="add-food-modal">
+            <form onSubmit={handleAddFood} className="add-food-form">
+              <h2>Add New Food</h2>
+              <input
+                type="text"
+                name="name"
+                placeholder="Food Name"
+                value={newFood.name}
+                onChange={handleChange}
+              />
+              <input
+                type="number"
+                name="price"
+                placeholder="Price (UGX)"
+                value={newFood.price}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="category"
+                placeholder="Category"
+                value={newFood.category}
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="image"
+                placeholder="Image URL"
+                value={newFood.image}
+                onChange={handleChange}
+              />
+              <button type="submit">Add Food</button>
+            </form>
+          </div>
+        )}
       </div>
+
+      <footer className="footer">A product By Mubiru Elton Felix</footer>
     </div>
   );
 }

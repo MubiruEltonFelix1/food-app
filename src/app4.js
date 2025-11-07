@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import SplashScreen from "./components/SplashScreen";
-import Marketplace from "./components/Marketplace";
-import "./components/Marketplace.css";
+import SplashScreen from "./pages/SplashScreen";
+import Marketplace from "./pages/Marketplace";
+import "./pages/Marketplace.css";
 
 function App() {
   const [showSplash, setShowSplash] = useState(true);

@@ -125,6 +125,3 @@ This project is open-source and available under the [MIT License](LICENSE)
 
 ---
 
-If you want, I can also **draft a more advanced, professional README with badges, live demo links, GIFs/screenshots, and API usage examples** — like you see in top-tier GitHub repos.
-
-Do you want me to do that?

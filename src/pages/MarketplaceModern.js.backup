@@ -1,20 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from "react-router-dom";
-import CartPage from "./CartPage";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";              <Link to="/group-delivery" className="btn btn-success btn-sm">
+                👥
+              </Link>mport CartPage from "./CartPage";
 import CheckoutPage from "./CheckOutPage";
 import RestaurantDetail from "./RestaurantDetail";
 import GroupDelivery from "./GroupDelivery";
 import GroupDeliveryConfirmation from "./GroupDeliveryConfirmation";
 import UserProfile from "./UserProfile";
 import { AuthProvider, useAuth, LoginModal, SignupModal } from "../contexts/AuthContext";
-import EnhancedSearch from "../components/EnhancedSearch";
+import "./MarketplaceModern.css";
 import "./MarketplaceModern.css";
 
 function Marketplace() {
+  return (
+    <AuthProvider>
+      <MarketplaceContent />
+    </AuthProvider>
+  );
+}
+
+function MarketplaceContent() {
   const [foods, setFoods] = useState([]);
+  const [filteredFoods, setFilteredFoods] = useState([]);
   const [restaurants] = useState([
     { id: 1, name: "Campus Kitchen", specialty: "African Dishes", rating: 4.6, deliveryTime: "20–30 min", fee: "Free", image: "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=800" },
-    { id: 2, name: "Foodie’s Hub", specialty: "Fast Food & Burgers", rating: 4.3, deliveryTime: "15–25 min", fee: "$0.99", image: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=800" }
+    { id: 2, name: "Foodie's Hub", specialty: "Fast Food & Burgers", rating: 4.3, deliveryTime: "15–25 min", fee: "$0.99", image: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=800" }
   ]);
   const [studentCooks] = useState([
     { id: 1, name: "Sarah Nalule", dish: "Yummy Meat Stew", contact: "0771 234567", rating: 4.7, price: "UGX 12,000", image: "https://images.unsplash.com/photo-1626108846582-e92033b90b16?w=800" },
@@ -24,6 +34,8 @@ function Marketplace() {
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showSignupModal, setShowSignupModal] = useState(false);
 
   useEffect(() => {
     const fetchFoods = async () => {
@@ -31,6 +43,7 @@ function Marketplace() {
         const res = await fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=");
         const data = await res.json();
         setFoods(data.meals || []);
+        setFilteredFoods(data.meals || []);
       } catch (err) {
         console.error(err);
       } finally {
@@ -39,6 +52,11 @@ function Marketplace() {
     };
     fetchFoods();
   }, []);
+
+  // Search functionality - receives filtered results from EnhancedSearch
+  const handleSearch = (filteredResults) => {
+    setFilteredFoods(filteredResults);
+  };
 
   const addToCart = (item) => {
     const exists = cart.find(i => i.idMeal === item.idMeal);
@@ -61,11 +79,16 @@ function Marketplace() {
   return (
     <Router>
       <div className="app-container">
-        <Navbar cartCount={cart.reduce((sum, i) => sum + i.quantity, 0)} />
+        <Navbar 
+          cartCount={cart.reduce((sum, i) => sum + i.quantity, 0)} 
+          onLoginClick={() => setShowLoginModal(true)}
+          onSignupClick={() => setShowSignupModal(true)}
+        />
         <Routes>
           <Route path="/" element={
             <Home
               foods={foods}
+              filteredFoods={filteredFoods}
               restaurants={restaurants}
               cooks={studentCooks}
               addToCart={addToCart}
@@ -74,12 +97,21 @@ function Marketplace() {
               loading={loading}
               selectedCategory={selectedCategory}
               setSelectedCategory={setSelectedCategory}
+              onSearch={handleSearch}
             />
           } />
           <Route path="/cart" element={<CartPage cart={cart} setCart={setCart} />} />
           <Route path="/checkout" element={<CheckoutPage cart={cart} />} />
+          <Route path="/group-delivery" element={<GroupDelivery cart={cart} />} />
+          <Route path="/group-delivery-confirmation" element={<GroupDeliveryConfirmation />} />
+          <Route path="/profile" element={<UserProfile />} />
           <Route path="/restaurant/:id" element={<RestaurantDetail restaurants={restaurants} addToCart={addToCart} />} />
         </Routes>
+        
+        {/* Auth Modals */}
+        <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} />
+        <SignupModal isOpen={showSignupModal} onClose={() => setShowSignupModal(false)} />
+        
         <Footer />
       </div>
     </Router>
@@ -87,40 +119,81 @@ function Marketplace() {
 }
 
 // ===== Navbar =====
-function Navbar({ cartCount }) {
-  const navigate = useNavigate();
+function Navbar({ cartCount, onLoginClick, onSignupClick }) {
+  const { user, logout } = useAuth();
 
   return (
     <nav className="navbar-fixed">
       <div className="navbar-content">
-        <button onClick={() => navigate(-1)} className="back-btn">←</button>
         <h1 className="logo">MUST E-Cafeteria</h1>
-        <Link to="/cart" className="cart-btn">
-          <span className="cart-icon">Cart</span>
-          {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
-        </Link>
+        <div className="nav-actions">
+          {user ? (
+            <>
+              <Link to="/profile" className="btn btn-ghost btn-sm">
+                👤
+              </Link>
+              <Link to="/group-delivery" className="btn btn-success btn-sm">
+                �
+              </Link>
+              <button onClick={logout} className="btn btn-ghost btn-sm">
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <button onClick={onLoginClick} className="btn btn-outline btn-sm">
+                Login
+              </button>
+              <button onClick={onSignupClick} className="btn btn-primary btn-sm">
+                Sign Up
+              </button>
+            </>
+          )}
+          <Link to="/cart" className="btn btn-primary btn-sm cart-btn">
+            🛒 {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
+          </Link>
+        </div>
       </div>
     </nav>
   );
 }
 
 // ===== Home =====
-function Home({ foods, restaurants, cooks, addToCart, favorites, toggleFavorite, loading, selectedCategory, setSelectedCategory }) {
-  const filteredFoods = selectedCategory === "All" ? foods : foods.filter(f => f.strCategory === selectedCategory);
-  const categories = ["All", "Breakfast", "Lunch", "Chicken", "Dessert", "Beef"];
-
-  const renderStars = (rating) => "★".repeat(Math.floor(rating)) + "☆".repeat(5 - Math.floor(rating));
+function Home({ foods, filteredFoods, restaurants, cooks, addToCart, favorites, toggleFavorite, loading, selectedCategory, setSelectedCategory, onSearch }) {
+  const displayFoods = selectedCategory === "All" ? filteredFoods : filteredFoods.filter(f => f.strCategory === selectedCategory);
+  const categories = ["All", "Breakfast", "Main Course", "Dessert"];
 
   return (
     <div className="home-page">
-      {/* Hero Search Bar */}
-      <div className="search-hero">
-        <div className="search-bar">
-          <span className="search-icon">Search</span>
-          <input type="text" placeholder="Search for food, restaurants..." />
+      {/* Modern Hero Section */}
+      <div className="hero-section">
+        <div className="hero-content">
+          <h1 className="hero-title">Fresh Meals, Delivered Fast</h1>
+          <p className="hero-subtitle">Discover amazing food from campus restaurants and student chefs</p>
         </div>
-        <p className="delivery-info">Delivering to <strong>Main Campus</strong> ▼</p>
       </div>
+
+      {/* Simple Search */}
+      <div className="simple-search">
+        <div className="search-container">
+          <span className="search-icon">🔍</span>
+          <input 
+            type="text" 
+            placeholder="Search for food, restaurants..."
+            className="search-input"
+            onChange={(e) => {
+              const searchTerm = e.target.value.toLowerCase();
+              const filtered = foods.filter(food => 
+                food.strMeal.toLowerCase().includes(searchTerm) ||
+                food.strCategory.toLowerCase().includes(searchTerm)
+              );
+              onSearch(filtered);
+            }}
+          />
+        </div>
+      </div>
+
+      <p className="delivery-info">📍 Delivering to <strong>Main Campus</strong></p>
 
       {/* Categories */}
       <div className="categories-scroll">
@@ -141,7 +214,7 @@ function Home({ foods, restaurants, cooks, addToCart, favorites, toggleFavorite,
         <div className="meal-grid">
           {loading
             ? Array(6).fill(0).map((_, i) => <SkeletonCard key={i} />)
-            : filteredFoods.slice(0, 12).map(food => (
+            : displayFoods.slice(0, 12).map(food => (
                 <MealCard
                   key={food.idMeal}
                   food={food}
@@ -189,7 +262,7 @@ function Home({ foods, restaurants, cooks, addToCart, favorites, toggleFavorite,
                   <span>★ {cook.rating}</span>
                   <span className="price">{cook.price}</span>
                 </div>
-                <button className="contact-btn">Message</button>
+                <button className="btn btn-primary contact-btn">📱 Message</button>
               </div>
             </div>
           ))}
@@ -200,6 +273,15 @@ function Home({ foods, restaurants, cooks, addToCart, favorites, toggleFavorite,
 }
 
 function MealCard({ food, addToCart, isFavorite, toggleFavorite }) {
+  // Generate consistent price based on food ID
+  const getPrice = (id) => {
+    const hash = id.split('').reduce((a, b) => {
+      a = ((a << 5) - a) + b.charCodeAt(0);
+      return a & a;
+    }, 0);
+    return (Math.abs(hash) % 20 + 10);
+  };
+
   return (
     <div className="meal-card">
       <div className="image-wrapper">
@@ -212,8 +294,10 @@ function MealCard({ food, addToCart, isFavorite, toggleFavorite }) {
         <h3>{food.strMeal}</h3>
         <p className="cuisine">{food.strArea} • {food.strCategory}</p>
         <div className="meal-actions">
-          <span className="price">UGX {(Math.random() * 20 + 10).toFixed(0)}k</span>
-          <button onClick={() => addToCart(food)} className="add-btn">+</button>
+          <span className="price">UGX {getPrice(food.idMeal)}k</span>
+          <button onClick={() => addToCart(food)} className="btn btn-primary btn-icon add-btn">
+            ➕
+          </button>
         </div>
       </div>
     </div>

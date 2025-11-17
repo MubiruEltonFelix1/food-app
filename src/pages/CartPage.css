@@ -224,6 +224,101 @@
           background: #dc4c0a;
         }
 
+        .btn-outline {
+          background: white;
+          color: #374151;
+          border: 2px solid #d1d5db;
+        }
+
+        .btn-outline:hover {
+          background: #f3f4f6;
+          border-color: #9ca3af;
+        }
+
+        /* Delivery Options */
+        .delivery-options {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .delivery-option-card {
+          background: #f9fafb;
+          padding: 1.25rem;
+          border-radius: 12px;
+          border: 2px solid #e5e7eb;
+          text-align: center;
+          transition: all 0.3s ease;
+        }
+
+        .delivery-option-card:hover {
+          border-color: #d1d5db;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .delivery-option-card.group-delivery {
+          background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+          border-color: #0ea5e9;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .delivery-option-card.group-delivery::before {
+          content: "SAVE MONEY";
+          position: absolute;
+          top: 8px;
+          right: -25px;
+          background: #059669;
+          color: white;
+          padding: 4px 30px;
+          font-size: 10px;
+          font-weight: bold;
+          transform: rotate(45deg);
+        }
+
+        .delivery-option-card h4 {
+          margin: 0 0 0.5rem 0;
+          color: #374151;
+          font-size: 1.125rem;
+          font-weight: 600;
+        }
+
+        .delivery-option-card p {
+          margin: 0 0 0.75rem 0;
+          color: #6b7280;
+          font-size: 0.875rem;
+        }
+
+        .delivery-fee {
+          color: #dc2626;
+          font-weight: 600;
+          font-size: 0.875rem;
+          margin-bottom: 1rem;
+        }
+
+        .delivery-savings {
+          color: #059669;
+          font-weight: 600;
+          font-size: 0.875rem;
+          margin-bottom: 1rem;
+        }
+
+        .delivery-option-card .btn {
+          width: 100%;
+          padding: 0.75rem 1rem;
+          font-size: 0.875rem;
+        }
+
+        .delivery-option-card.group-delivery .btn-primary {
+          background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+        }
+
+        .delivery-option-card.group-delivery .btn-primary:hover {
+          background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+        }
+
         .trust-line {
           text-align: center;
           margin-top: 2rem;
@@ -244,5 +339,17 @@
 
           .summary-total {
             font-size: 1.25rem;
+          }
+
+          .delivery-options {
+            grid-template-columns: 1fr;
+          }
+
+          .delivery-option-card {
+            padding: 1rem;
+          }
+
+          .delivery-option-card h4 {
+            font-size: 1rem;
           }
         }

@@ -48,6 +48,40 @@ body {
   color: #ee2a7b;
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.group-delivery-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.group-delivery-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.group-icon {
+  font-size: 14px;
+}
+
+.group-text {
+  white-space: nowrap;
+}
+
 .cart-btn {
   position: relative;
   background: #ee2a7b;
@@ -354,8 +388,105 @@ body {
   text-decoration: none;
 }
 
+/* Auth buttons */
+.login-btn, .signup-btn {
+  background: none;
+  border: 1px solid #ee2a7b;
+  color: #ee2a7b;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.signup-btn {
+  background: #ee2a7b;
+  color: white;
+}
+
+.login-btn:hover {
+  background: #ee2a7b;
+  color: white;
+}
+
+.signup-btn:hover {
+  background: #d91a6c;
+  border-color: #d91a6c;
+}
+
+.profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+
+.profile-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(67, 233, 123, 0.4);
+}
+
+.logout-btn {
+  background: none;
+  border: 1px solid #ff6b6b;
+  color: #ff6b6b;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: #ff6b6b;
+  color: white;
+}
+
+.profile-icon {
+  font-size: 14px;
+}
+
+.profile-text {
+  white-space: nowrap;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
+  .navbar-content {
+    padding: 10px 12px;
+  }
+
+  .group-delivery-link .group-text {
+    display: none;
+  }
+
+  .group-delivery-link {
+    padding: 8px;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    justify-content: center;
+  }
+
+  .cart-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
   .meal-grid,
   .restaurant-grid,
   .cooks-grid {

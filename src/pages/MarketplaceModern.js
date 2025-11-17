@@ -51,7 +51,7 @@ function MarketplaceContent() {
     fetchFoods();
   }, []);
 
-  // Search functionality - receives filtered results from EnhancedSearch
+  // Search functionality
   const handleSearch = (filteredResults) => {
     setFilteredFoods(filteredResults);
   };

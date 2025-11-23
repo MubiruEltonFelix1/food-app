@@ -1,21 +1,38 @@
+# MUST E-Cafeteria 🍽️
 
+A modern, responsive campus food delivery application built with React 18, designed specifically for Mbarara University of Science and Technology (MUST). This application provides students with a seamless way to order food from campus restaurants and student chefs.
 
-Campus Food Marketplace 🍴
+## 🌟 Features
 
-**Campus Food Marketplace** is a dynamic web application built with **React** that allows users to browse, search, and order food from campus vendors. The app features a professional UI, dynamic food listings via APIs, a cart system, and user role management for admins and customers.
+### 🎨 **Professional Splash Screen**
+- Corporate-grade loading animation with amber branding
+- Professional particle effects and smooth transitions  
+- Dynamic progress tracking with contextual messages
 
----
+### 📱 **Mobile-First Design**
+- Responsive design optimized for mobile devices
+- Professional bottom navigation with functional overlays
+- Clean, uncluttered mobile interface
 
-## **Features**
+### 🔐 **Authentication System**
+- Smart mobile authentication through profile menu
+- Desktop login/signup buttons with glass morphism design
+- Guest mode for immediate access
 
-* Responsive and modern interface with a top navigation bar
-* Dynamic food listings fetched from APIs
-* Search and filter foods by category
-* Add new foods (Admin only)
-* Cart functionality with quantity management
-* Order management for users
-* User profile management
-* Role-based permissions (Admin vs Customer)
+### 🔍 **Advanced Search**
+- Professional search bar with glass morphism effects
+- Mobile search overlay with popular suggestions
+- Filter functionality for enhanced discovery
+
+### 🛒 **Shopping & Cart**
+- Real-time cart updates with badge notifications
+- Seamless cart management across all screens
+- Professional checkout process with multiple payment options
+
+### 👥 **Multi-Vendor Support**
+- Campus restaurants integration
+- Student chef marketplace
+- Rating and review system
 
 ---
 
@@ -25,13 +42,12 @@ https://campusfoodapp.netlify.app/
 
 ---
 
-
-
 ## **Tech Stack**
 
-* **Frontend:** React, React Hooks (`useState`, `useEffect`), CSS
+* **Frontend:** React 18, React Hooks, CSS Grid/Flexbox
 * **API:** TheMealDB API for food data
-* **Backend:** Optional Node.js/Express + MongoDB (for advanced versions)
+* **Styling:** Modern CSS with animations and responsive design
+* **Architecture:** Component-based with Context API
 * **Hosting:** Netlify
 
 ---

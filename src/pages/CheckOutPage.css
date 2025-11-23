@@ -226,9 +226,14 @@ body.dark-mode { background: var(--bg); }
   margin-top: 2rem;
   flex-wrap: wrap;
   font-size: .875rem;
-  color: var(--text-light);
 }
-.badge { display: flex; align-items: center; gap: .5rem; }
+.badge { 
+  display: flex; 
+  align-items: center; 
+  gap: .5rem; 
+  color: var(--text);
+  font-weight: 500;
+}
 .badge svg { width: 20px; height: 20px; color: var(--success); }
 
 /* Responsive tweaks */

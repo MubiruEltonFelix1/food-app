@@ -1,18 +1,23 @@
 {
-  "name": "how-react-works",
-  "version": "0.1.0",
-  "private": true,
+  "name": "must-e-cafeteria",
+  "version": "1.2.0",
+  "description": "Professional campus food delivery application for MUST university with mobile-first design and corporate branding",
+  "keywords": ["react", "food-delivery", "mobile-first", "campus", "marketplace"],
+  "author": "MUST Development Team",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/must-e-cafeteria.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/must-e-cafeteria/issues"
+  },
+  "homepage": "https://must-e-cafeteria.vercel.app",
+  "private": false,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.2.0",
-    "@testing-library/user-event": "^13.5.0",
-    "axios": "^1.13.1",
-    "lucide-react": "^0.553.0",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-router-dom": "^6",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "react-router-dom": "^7.9.6",
+    "react-scripts": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -22,15 +27,11 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ],
     "rules": {
-      "@typescript-eslint/no-unused-vars": "off",
       "no-unused-vars": "off",
-      "react-hooks/exhaustive-deps": "off",
-      "no-undef": "off",
-      "no-unreachable": "off"
+      "react-hooks/exhaustive-deps": "off"
     }
   },
   "browserslist": {
@@ -44,14 +45,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@babel/core": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
-    "@babel/preset-react": "^7.28.5",
-    "@tailwindcss/postcss": "^4.1.16",
-    "autoprefixer": "^10.4.21",
-    "babel-loader": "^10.0.0",
-    "postcss": "^8.5.6"
   }
 }

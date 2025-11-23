@@ -1,12 +1,24 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
-// import ReactDOM from 'react-dom';
+import Marketplace from "./pages/Marketplace";
+import SplashScreen from "./pages/SplashScreen";
+import "./index.css";
 
-import App from "./app4";
-import "./pages/Marketplace";
+function App() {
+  const [showSplash, setShowSplash] = useState(true);
 
-// REACT 18
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSplash(false);
+    }, 5000); // Show splash for 5 seconds - more time to appreciate
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return showSplash ? <SplashScreen /> : <Marketplace />;
+}
+
+// REACT 18 with Database Integration
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

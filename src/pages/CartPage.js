@@ -2,12 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./CartPage.css";
 
-function CartPage({ cart, setCart }) {
+function CartPage({ cart, removeFromCart }) {
   const total = cart.reduce((acc, item) => acc + (item.price || 2000) * item.quantity, 0);
-
-  const removeFromCart = (idMeal) => {
-    setCart(cart.filter(item => item.idMeal !== idMeal));
-  };
 
   return (
     <div className="cart-container">
@@ -82,27 +78,12 @@ function CartPage({ cart, setCart }) {
                 <h3 className="summary-title">Total</h3>
                 <p className="summary-total">UGX {total.toLocaleString()}</p>
               </div>
-              <div className="delivery-options">
-                <div className="delivery-option-card">
-                  <h4>🚗 Regular Delivery</h4>
-                  <p>Individual delivery to your location</p>
-                  <div className="delivery-fee">Delivery: UGX 5,000</div>
-                  <Link to="/checkout" className="btn btn-secondary">
-                    Regular Checkout
-                  </Link>
-                </div>
-                <div className="delivery-option-card group-delivery">
-                  <h4>👥 Group Delivery</h4>
-                  <p>Join other students and split delivery fees!</p>
-                  <div className="delivery-savings">Save up to UGX 4,000</div>
-                  <Link to="/group-delivery" className="btn btn-primary">
-                    Join Group Delivery
-                  </Link>
-                </div>
-              </div>
               <div className="button-group">
-                <Link to="/" className="btn btn-outline">
+                <Link to="/" className="btn btn-secondary">
                   Continue Shopping
+                </Link>
+                <Link to="/checkout" className="btn btn-primary">
+                  Proceed to Checkout
                 </Link>
               </div>
             </div>
